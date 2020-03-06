@@ -40,4 +40,4 @@ outputs:
     description: 'The ID of the file created.' 
 runs:
   using: 'node12'
-  main: 'curseforge-upload.js'
+  main: 'dist/index.js'
