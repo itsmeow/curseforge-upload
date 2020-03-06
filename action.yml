@@ -1,0 +1,42 @@
+name: 'Upload to CurseForge'
+description: 'Uploads files to CurseForge via CurseForge API'
+author: 'itsmeow'
+inputs:
+  api_token:
+    description: 'Token used to authenticate with CurseForge API. Definitely use a secret for this.'
+    required: true
+  project_id:
+    description: 'Project id (numerical) to upload file to. You can ge the numerical ID from the sidebar on a project page.'
+    required: true
+  game_endpoint:
+    description: 'The subdomain of curseforge.com where the upload request will be made. (minecraft, kerbal, etc.)"
+    required: true
+  file_path:
+    description: 'The path to the file you want to upload'
+    required: true
+  changelog:
+    description: 'The changelog text to put on the file. Can be HTML or markdown if changelog_type is set.'
+    required: true
+  changelog_type:
+    description: 'The type of the changelog. Allowed values: text, html, markdown. Defaults to text.'
+    required: false
+  display_name:
+    description: 'The display name for this file. Defaults to the filename.'
+    required: false
+  parent_file_id:
+    description: 'The id of the parent file to put this file under. Defaults to none. (IDs are integers)'
+    required: false
+  game_versions:
+    description: 'The game version IDs to select on this file. Seperate IDs with ", " (no quotes) (IDs are integers)'
+    required: true
+  release_type:
+    description: 'The type of this release. Allowed values: alpha, beta, release'
+    required: true'
+  relations:
+    description: 'List of projects this file is related to and their relation type. Seperate with ", " (no quotes). Format: projectslug:relationType - Valid relationTypes are: embeddedLibrary, incompatible, optionalDependency, requiredDependency, and tool'
+outputs:
+  id:
+    description: 'The ID of the file created.' 
+runs:
+  using: 'node10'
+  main: 'run.js'

@@ -1,0 +1,3 @@
+node_modules/
+.github/workflows/
+test_jar.jar
