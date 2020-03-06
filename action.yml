@@ -41,6 +41,3 @@ outputs:
 runs:
   using: 'docker'
   main: 'Dockerfile'
-branding:
-  icon: 'package'
-  color: 'gray-dark'
