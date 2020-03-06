@@ -76,4 +76,4 @@ async function run() {
     }
 }
 
-run();
+module.exports = await run();
