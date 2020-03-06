@@ -21,7 +21,7 @@ async function getGameVersions(token, endpoint) {
             }
         }
     });
-    if(gameVersionNames.length > 0) {
+    if(Object.keys(gameVersionNames).length > 0) {
         const options = {
             method: "GET",
             url: "https://" + endpoint + ".curseforge.com/api/game/versions",
@@ -41,7 +41,7 @@ async function getGameVersions(token, endpoint) {
                 "X-Api-Token": token
             }
         }
-        const versionTypeData = gameVersionNames.values().filter((v,i,a) => v != "blank").length > 0 ? JSON.parse(await requestPromise(optionsTypes)) : [];
+        const versionTypeData = Object.values(gameVersionNames).filter((v,i,a) => v != "blank").length > 0 ? JSON.parse(await requestPromise(optionsTypes)) : [];
 
         const filteredVersions = versionData.filter(function(value, index, array) {
             let typeId = gameVersionNames.includes(value.name) ? gameVersionNames[value.name] : (gameVersionNames.includes(value.slug) ? gameVersionNames[value.slug] : "");
