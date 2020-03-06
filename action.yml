@@ -9,7 +9,7 @@ inputs:
     description: 'Project id (numerical) to upload file to. You can ge the numerical ID from the sidebar on a project page.'
     required: true
   game_endpoint:
-    description: 'The subdomain of curseforge.com where the upload request will be made. (minecraft, kerbal, etc.)"
+    description: 'The subdomain of curseforge.com where the upload request will be made. (minecraft, kerbal, etc.)'
     required: true
   file_path:
     description: 'The path to the file you want to upload'
@@ -31,9 +31,10 @@ inputs:
     required: true
   release_type:
     description: 'The type of this release. Allowed values: alpha, beta, release'
-    required: true'
+    required: true
   relations:
     description: 'List of projects this file is related to and their relation type. Seperate with ", " (no quotes). Format: projectslug:relationType - Valid relationTypes are: embeddedLibrary, incompatible, optionalDependency, requiredDependency, and tool'
+    required: false
 outputs:
   id:
     description: 'The ID of the file created.' 
