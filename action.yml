@@ -2,7 +2,7 @@ name: 'Upload to CurseForge'
 description: 'Uploads files to CurseForge via CurseForge API'
 author: 'itsmeow'
 inputs:
-  api_token:
+  token:
     description: 'Token used to authenticate with CurseForge API. Definitely use a secret for this.'
     required: true
   project_id:
