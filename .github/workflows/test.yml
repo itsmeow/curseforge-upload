@@ -11,7 +11,7 @@ jobs:
       id: test_action
       uses: itsmeow/curseforge-upload@master
       with:
-        token: ${ secrets.CF_API_TOKEN }
+        token: ${{ secrets.CF_API_TOKEN }}
         project_id: 262222
         game_endpoint: minecraft
         file_path: test_jar.jar
