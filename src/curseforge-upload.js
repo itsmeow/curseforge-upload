@@ -15,9 +15,9 @@ async function run() {
         const changelogType = core.getInput('changelog_type', { required: false });
         const displayName = core.getInput('display_name', { required: false });
         const parentFileID = parseInt(core.getInput('parent_file_id', { required: false }));
-        gameVersions = core.getInput('game_versions', { required: true });
-        var stringList = gameVersions.split(',');
-        gameVersions = new Array();
+        gameVersionsString = core.getInput('game_versions', { required: true });
+        var stringList = gameVersionsString.split(',');
+        var gameVersions = new Array();
         stringList.forEach(value, index, array => gameVersions[index] = parseInt(value));
         const releaseType = core.getInput('release_type', { required: true });
         if (!(releaseType == "alpha" || releaseType == "beta" || releaseType == "release")) {
