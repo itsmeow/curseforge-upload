@@ -28,7 +28,7 @@ async function getGameVersions(token, endpoint) {
         core.debug("Converting game version names to IDs via CF API request");
         const versionData = JSON.parse(await requestPromise(options));
         const filteredVersions = versionData.filter(function(value, index, array) {
-            return gameVersionNames.contains(value.name) || gameVersionNames.contains(value.slug);
+            return gameVersionNames.includes(value.name) || gameVersionNames.includes(value.slug);
         });
         filteredVersions.forEach(function(value, index, array) {
             gameVersions.push(value.id);
