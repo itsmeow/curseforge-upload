@@ -2,6 +2,62 @@ const core = require('@actions/core');
 const fs = require('fs');
 const req = require('request');
 
+async function getGameVersions(token, endpoint) {
+    let gameVersionsString = core.getInput('game_versions', { required: true });
+    let stringList = gameVersionsString.split(',');
+    let gameVersions = [];
+    let gameVersionNames = [];
+    stringList.forEach(function(valStr, index, array) {
+        if (valStr != null && valStr != "") {
+            if(isID(valStr)) {
+                gameVersions.push(parseInt(valStr));
+            } else {
+                gameVersionNames.push(valStr);
+            }
+        }
+    });
+    if(gameVersionNames.length > 0) {
+        const options = {
+            method: "GET",
+            url: "https://" + endpoint + ".curseforge.com/api/game/versions",
+            port: 443,
+            headers: {
+                "X-Api-Token": token
+            }
+        }
+        core.debug("Converting game version names to IDs via CF API request");
+        const versionData = JSON.parse(await requestPromise(options));
+        const filteredVersions = versionData.filter(function(value, index, array) {
+            return gameVersionNames.contains(value.name) || gameVersionNames.contains(value.slug);
+        });
+        filteredVersions.forEach(function(value, index, array) {
+            gameVersions.push(value.id);
+            core.debug("Converted " + value.slug + " to " + value.id);
+        });
+    }
+    return gameVersions;
+}
+
+function requestPromise(options) {
+    return new Promise(function (resolve, reject) {
+        req(options, function (err, response, body) {
+            if (!err) {
+                if (response.statusCode == 200) {
+                    resolve(body);
+                } else {
+                    reject(response.statusCode + ": " + response.statusMessage);
+                }
+            } else {
+                reject(error);
+            }
+        });
+    }).catch(error => core.setFailed(error.toString()));
+}
+
+function isID(str) {
+    return !(isNaN(str) || str.indexOf(".") != -1)
+}
+
 async function run() {
     try {
         const token = core.getInput('token', { required: true });
@@ -15,14 +71,7 @@ async function run() {
         const changelogType = core.getInput('changelog_type', { required: false });
         const displayName = core.getInput('display_name', { required: false });
         const parentFileIDStr = core.getInput('parent_file_id', { required: false });
-        var gameVersionsString = core.getInput('game_versions', { required: true });
-        var stringList = gameVersionsString.split(',');
-        var gameVersions = [];
-        stringList.forEach(function(valStr, index, array) {
-            if (valStr != null) {
-                gameVersions[index] = parseInt(valStr)
-            }
-        });
+        const gameVersions = await getGameVersions(token, endpoint);
         const releaseType = core.getInput('release_type', { required: true });
         if (!(releaseType == "alpha" || releaseType == "beta" || releaseType == "release")) {
             throw new Error("Invalid release type input! Use alpha, beta, or release!");
@@ -30,7 +79,7 @@ async function run() {
         const relationsString = core.getInput('relations', { required: false });
         const projects = [];
         relationsString.split(',').forEach(function(value, index, array) {
-            if (value != null) {
+            if (value != null && value != "") {
                 const projectSplit = value.split(':');
                 projects[index] = {
                     slug: projectSplit[0],
@@ -38,7 +87,7 @@ async function run() {
                 };
             }
         });
-        var metadata = {
+        let metadata = {
             "changelog": changelog,
             "gameVersions": gameVersions,
             "releaseType": releaseType
