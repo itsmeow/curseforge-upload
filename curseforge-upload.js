@@ -17,11 +17,10 @@ async function run() {
         const parentFileIDStr = core.getInput('parent_file_id', { required: false });
         var gameVersionsString = core.getInput('game_versions', { required: true });
         var stringList = gameVersionsString.split(',');
-        core.debug(stringList.toString());
         var gameVersions = new Array();
-        stringList.forEach(value, index, array => {
-            if (value != null) {
-                gameVersions[index] = parseInt(value)
+        stringList.forEach(valStr, index, array => {
+            if (valStr != null) {
+                gameVersions[index] = parseInt(valStr)
             }
         });
         const releaseType = core.getInput('release_type', { required: true });
