@@ -39,5 +39,5 @@ outputs:
   id:
     description: 'The ID of the file created.' 
 runs:
-  using: 'node10'
+  using: 'node12'
   main: 'dist/index.js'
