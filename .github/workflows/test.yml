@@ -14,7 +14,7 @@ jobs:
         token: ${ secrets.CF_API_TOKEN }
         project_id: 262222
         game_endpoint: minecraft
-        file_path: src/test_jar.jar
+        file_path: test_jar.jar
         changelog: Test changelog message!
         display_name: Test Jar
         game_versions: 6756, 4458
