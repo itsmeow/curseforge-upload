@@ -17,8 +17,8 @@ async function run() {
         const parentFileIDStr = core.getInput('parent_file_id', { required: false });
         var gameVersionsString = core.getInput('game_versions', { required: true });
         var stringList = gameVersionsString.split(',');
-        var gameVersions = new Array();
-        stringList.forEach(valStr, index, array => {
+        var gameVersions = [];
+        stringList.forEach(function(valStr, index, array) {
             if (valStr != null) {
                 gameVersions[index] = parseInt(valStr)
             }
@@ -28,8 +28,8 @@ async function run() {
             throw new Error("Invalid release type input! Use alpha, beta, or release!");
         }
         const relationsString = core.getInput('relations', { required: false });
-        const projects = new Array();
-        relationsString.split(',').forEach(value, index, array => {
+        const projects = [];
+        relationsString.split(',').forEach(function(value, index, array) {
             if (value != null) {
                 const projectSplit = value.split(':');
                 projects[index] = {
