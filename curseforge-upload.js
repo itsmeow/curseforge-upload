@@ -39,9 +39,9 @@ async function run() {
             }
         });
         var metadata = {
-            changelog: changelog,
-            gameVersions: gameVersions,
-            releaesType: releaseType
+            "changelog": changelog,
+            "gameVersions": gameVersions,
+            "releaesType": releaseType
         };
         if (changelogType != null) {
             metadata.changelogType = changelogType;
@@ -55,7 +55,7 @@ async function run() {
         if (relationsString != null) {
             metadata.relations = { projects: projects };
         }
-        core.debug("Request meta:\n" + metadata);
+        core.debug("Request meta:\n" + JSON.stringify(metadata));
         const options = {
             method: "POST",
             url: "https://" + endpoint + ".curseforge.com/api/projects/" + projectId + "/upload-file",
@@ -72,7 +72,12 @@ async function run() {
         req.post(options, function(err, response, body) {
             if (!err) {
                 core.debug("Response code: " + response.statusCode);
-                core.setOutput(JSON.parse(body).id);
+                if (response.statusCode == 200) {
+                    core.setOutput(JSON.parse(body).id);
+                } else {
+                    core.setFailed(response.statusCode + ": " + response.statusMessage);
+                }
+
             } else {
                 core.setFailed(err);
             }
