@@ -17,6 +17,6 @@ jobs:
         file_path: test_jar.jar
         changelog: Test changelog message!
         display_name: Test Jar
-        game_versions: 6756, 4458
+        game_versions: 6756,4458
         release_type: alpha
         relations: betteranimalsplus:incompatible,claimit:optionalDependency
