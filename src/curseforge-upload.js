@@ -26,11 +26,13 @@ async function run() {
         const relationsString = core.getInput('relations', { required: false });
         const projects = new Array();
         relationsString.split(',').forEach(value, index, array => {
-            const projectSplit = value.split(':');
-            projects[index] = {
-                slug: projectSplit[0],
-                type: projectSplit[1]
-            };
+            if (value != null) {
+                const projectSplit = value.split(':');
+                projects[index] = {
+                    slug: projectSplit[0],
+                    type: projectSplit[1]
+                };
+            }
         });
         var metadata = {
             changelog: changelog,
