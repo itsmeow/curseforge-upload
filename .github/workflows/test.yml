@@ -20,6 +20,6 @@ jobs:
         file_path: test_jar.jar
         changelog: Test changelog message!
         display_name: Test Jar
-        game_versions: 1.12.2,4458,Java 7,1-12,1.12.1,Forge
+        game_versions: minecraft-1-12:1.12.2,4458,2:Java 7,Minecraft 1.12:1-12,1.12.1,Forge
         release_type: alpha
         relations: betteranimalsplus:incompatible,claimit:optionalDependency
