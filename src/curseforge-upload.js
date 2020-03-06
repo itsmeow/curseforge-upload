@@ -16,7 +16,7 @@ async function run() {
         const displayName = core.getInput('display_name', { required: false });
         const parentFileID = parseInt(core.getInput('parent_file_id', { required: false }));
         gameVersions = core.getInput('game_versions', { required: true });
-        var stringList = gameVersions.split(", ");
+        var stringList = gameVersions.split(',');
         gameVersions = new Array();
         stringList.forEach(value, index, array => gameVersions[index] = parseInt(value));
         const releaseType = core.getInput('release_type', { required: true });
@@ -25,7 +25,7 @@ async function run() {
         }
         const relationsString = core.getInput('relations', { required: false });
         const projects = new Array();
-        relationsString.split(', ').forEach(value, index, array => {
+        relationsString.split(',').forEach(value, index, array => {
             const projectSplit = value.split(':');
             projects[index] = {
                 slug: projectSplit[0],

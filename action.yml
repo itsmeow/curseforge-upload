@@ -27,13 +27,13 @@ inputs:
     description: 'The id of the parent file to put this file under. Defaults to none. (IDs are integers)'
     required: false
   game_versions:
-    description: 'The game version IDs to select on this file. Seperate IDs with ", " (no quotes) (IDs are integers)'
+    description: 'The game version IDs to select on this file. Seperate IDs with "," (no quotes) (IDs are integers)'
     required: true
   release_type:
     description: 'The type of this release. Allowed values: alpha, beta, release'
     required: true
   relations:
-    description: 'List of projects this file is related to and their relation type. Seperate with ", " (no quotes). Format: projectslug:relationType - Valid relationTypes are: embeddedLibrary, incompatible, optionalDependency, requiredDependency, and tool'
+    description: 'List of projects this file is related to and their relation type. Seperate with "," (no quotes). Format: projectslug:relationType - Valid relationTypes are: embeddedLibrary, incompatible, optionalDependency, requiredDependency, and tool'
     required: false
 outputs:
   id:
