@@ -2,11 +2,9 @@
   "name": "curseforge-upload",
   "version": "1.0.0",
   "description": "Upload to CurseForge",
-  "main": "dist/index.js",
+  "main": "curseforge-upload.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "ncc build src/main.js",
-    "precommit": "npm run build && git add dist/"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -23,7 +21,6 @@
   "homepage": "https://github.com/itsmeow/curseforge-upload#readme",
   "dependencies": {
     "@actions/core": "^1.2.3",
-    "@zeit/ncc": "^0.21.1",
     "request": "^2.88.2"
   }
 }
