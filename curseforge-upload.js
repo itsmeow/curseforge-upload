@@ -44,6 +44,7 @@ async function getGameVersions(token, endpoint) {
         const versionTypeData = Object.values(gameVersionNames).filter((v,i,a) => v != "blank").length > 0 ? JSON.parse(await requestPromise(optionsTypes)) : [];
 
         const filteredVersions = versionData.filter(function(value, index, array) {
+            
             let typeId = gameVersionNames.hasOwnProperty(value.name) ? gameVersionNames[value.name] : (gameVersionNames.hasOwnProperty(value.slug) ? gameVersionNames[value.slug] : "");
             if(typeId != null && typeId != "blank" && typeId != "") {
                 if(isID(typeId)) {
