@@ -39,5 +39,5 @@ outputs:
   id:
     description: 'The ID of the file created.' 
 runs:
-  using: 'docker'
-  main: 'Dockerfile'
+  using: 'node10'
+  main: 'dist/index.js'
