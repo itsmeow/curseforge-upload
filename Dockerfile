@@ -1,4 +1,4 @@
-FROM node:10.16.0-alpine
+FROM node:10.11.0-alpine
 
 COPY ./src /action
 
