@@ -55,7 +55,7 @@ async function run() {
         if (relationsString != null) {
             metadata.relations = { projects: projects };
         }
-        console.log("Request meta:\n" + metadata);
+        core.debug("Request meta:\n" + metadata);
         const options = {
             method: "POST",
             url: "https://" + endpoint + ".curseforge.com/api/projects/" + projectId + "/upload-file",
@@ -71,7 +71,7 @@ async function run() {
         }
         req.post(options, function(err, response, body) {
             if (!err) {
-                console.log("Response code: " + response.statusCode);
+                core.debug("Response code: " + response.statusCode);
                 core.setOutput(JSON.parse(body).id);
             } else {
                 core.setFailed(err);
