@@ -66,7 +66,7 @@ async function run() {
             },
             formData: {
                 "file": fs.createReadStream(filePath),
-                "metadata": metadata
+                "metadata": JSON.stringify(metadata)
             }
         }
         req.post(options, function(err, response, body) {
