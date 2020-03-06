@@ -1,0 +1,22 @@
+name: Test
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run test action
+      id: test_action
+      uses: itsmeow/curseforge-upload@master
+      with:
+        api_token: ${ secrets.CF_API_TOKEN }
+        project_id: 262222
+        game_endpoint: minecraft
+        file_path: src/test_jar.jar
+        changelog: Test changelog message!
+        display_name: Test Jar
+        game_versions: 6756, 4458
+        release_type: alpha
+        relations: betteranimalsplus:incompatible,claimit:optionalDependency
