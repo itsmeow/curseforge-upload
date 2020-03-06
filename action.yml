@@ -41,3 +41,6 @@ outputs:
 runs:
   using: 'node10'
   main: 'run.js'
+branding:
+  icon: 'package'
+  color: 'gray-dark'
