@@ -73,7 +73,8 @@ async function run() {
             if (!err) {
                 core.debug("Response code: " + response.statusCode);
                 if (response.statusCode == 200) {
-                    core.setOutput(JSON.parse(body).id);
+                    core.debug(body.toString());
+                    core.setOutput(JSON.parse(body).id.toString());
                 } else {
                     core.setFailed(response.statusCode + ": " + response.statusMessage);
                 }
