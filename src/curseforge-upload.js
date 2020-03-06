@@ -14,8 +14,8 @@ async function run() {
         const changelog = core.getInput('changelog', { required: true });
         const changelogType = core.getInput('changelog_type', { required: false });
         const displayName = core.getInput('display_name', { required: false });
-        const parentFileID = parseInt(core.getInput('parent_file_id', { required: false }));
-        gameVersionsString = core.getInput('game_versions', { required: true });
+        const parentFileIDStr = core.getInput('parent_file_id', { required: false });
+        var gameVersionsString = core.getInput('game_versions', { required: true });
         var stringList = gameVersionsString.split(',');
         var gameVersions = new Array();
         stringList.forEach(value, index, array => gameVersions[index] = parseInt(value));
@@ -45,8 +45,8 @@ async function run() {
         if (displayName != null) {
             metadata.displayName = displayName;
         }
-        if (parentFileID != null) {
-            metadata.parentFileID = parentFileID;
+        if (parentFileIDStr != null) {
+            metadata.parentFileID = parseInt(parentFileIDStr);
         }
         if (relationsString != null) {
             metadata.relations = { projects: projects };
