@@ -1,6 +1,6 @@
 {
   "name": "curseforge-upload",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Upload to CurseForge",
   "main": "curseforge-upload.js",
   "scripts": {

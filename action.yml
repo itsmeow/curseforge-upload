@@ -27,7 +27,7 @@ inputs:
     description: 'The id of the parent file to put this file under. Defaults to none. (IDs are integers)'
     required: false
   game_versions:
-    description: 'The game version IDs to select on this file. Seperate IDs with "," (no quotes) (IDs are integers)'
+    description: 'The game version IDs to select on this file. Seperate IDs with "," (no quotes). You can specify numerical or slug/name IDs and they will be converted to numerical IDs. For slugs/names with duplicates, you can specify a type by prefixing the name/slug with "(type):" (no quotes). See README for more info.'
     required: true
   release_type:
     description: 'The type of this release. Allowed values: alpha, beta, release'
