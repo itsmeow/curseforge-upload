@@ -41,21 +41,21 @@ async function run() {
         var metadata = {
             "changelog": changelog,
             "gameVersions": gameVersions,
-            "releaesType": releaseType
+            "releaseType": releaseType
         };
-        if (changelogType != null) {
+        if (changelogType != "") {
             metadata.changelogType = changelogType;
         }
-        if (displayName != null) {
+        if (displayName != "") {
             metadata.displayName = displayName;
         }
-        if (parentFileIDStr != null) {
+        if (parentFileIDStr != "") {
             metadata.parentFileID = parseInt(parentFileIDStr);
         }
-        if (relationsString != null) {
+        if (relationsString != "") {
             metadata.relations = { projects: projects };
         }
-        core.debug("Request meta:\n" + JSON.stringify(metadata));
+        core.debug("Request meta: " + JSON.stringify(metadata));
         const options = {
             method: "POST",
             url: "https://" + endpoint + ".curseforge.com/api/projects/" + projectId + "/upload-file",
