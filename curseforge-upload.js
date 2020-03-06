@@ -14,7 +14,10 @@ async function getGameVersions(token, endpoint) {
             } else {
                 if(valStr.includes(':')) {
                     let valStrSp = valStr.split(':');
-                    gameVersionNames[valStrSp[0]] = valStrSp[1];
+                    if(valStrSp.length != 2) {
+                        core.setFailed("Invalid game version type id pair: " + valStr + " - Valid Format: typeid:versionid");
+                    }
+                    gameVersionNames[valStrSp[1]] = valStrSp[0];
                 } else {
                     gameVersionNames[valStr] = "blank";
                 }
@@ -44,7 +47,7 @@ async function getGameVersions(token, endpoint) {
         const versionTypeData = Object.values(gameVersionNames).filter((v,i,a) => v != "blank").length > 0 ? JSON.parse(await requestPromise(optionsTypes)) : [];
 
         const filteredVersions = versionData.filter(function(value, index, array) {
-            
+
             let typeId = gameVersionNames.hasOwnProperty(value.name) ? gameVersionNames[value.name] : (gameVersionNames.hasOwnProperty(value.slug) ? gameVersionNames[value.slug] : "");
             if(typeId != null && typeId != "blank" && typeId != "") {
                 if(isID(typeId)) {
