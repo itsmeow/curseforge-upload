@@ -39,8 +39,8 @@ outputs:
   id:
     description: 'The ID of the file created.' 
 runs:
-  using: 'node10'
-  main: 'run.js'
+  using: 'docker'
+  main: 'Dockerfile'
 branding:
   icon: 'package'
   color: 'gray-dark'
