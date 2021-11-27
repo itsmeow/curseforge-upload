@@ -8,26 +8,45 @@ See action.yml
 [Here](https://github.com/itsmeow/curseforge-upload/blob/master/.github/workflows/test.yml) is an example workflow. It uploads test_jar.jar as "Test Jar" as an alpha build to [this project](https://minecraft.curseforge.com/projects/derpcats) with versions 1.12.2 and Java 8, a changelog simply stating "Test changelog message!" with a marked incompatibility with [this project](https://www.curseforge.com/minecraft/mc-mods/betteranimalsplus) and an optional dependency on [this project](https://www.curseforge.com/minecraft/mc-mods/claimit)
 
 ### Example Full Workflow with Discord notification and auto changelog
+<details>
+  <summary>Click to expand!</summary>
 The below example builds the jar and uploads it as an artefact to GitHub (only registered users can download this).
 It also creates a label called latest. Which is accessable to download for everyone. We post this info with a webhook to Discord.
 This will be done for each commit. If you want to create an official release continue reading.
 
-If a commit starts with Release, followed by the version and release type (EXAMPLE: Release 0.2.7.3 alpha). This will do the following.
-If you have a changelog.md in the root of your project and also formatted with a heading 2 for the title. The changelog feature will work if the correct commit syntax is used.
+If a commit starts with Release, followed by the version and release type (EXAMPLE: `Release 0.2.7.3 alpha`). This will do the following:
+- If you have a changelog.md in the root of your project and also formatted with a heading 2 (`## 0.2.7.3 new release`) for each version. The changelog feature will work if the correct commit syntax is used.
 It will then release to CF with the changelog and version and type specified in the commit message. The changelog.md must have the version in the commit message, or it will break.
+- It then will collect the needed information and store it into enviroment variables which then go into the CurseForge Uploader action.
+- Lastly we'll notify trough a webhook that a new official release is out.
 
-Do check this step: name: "CF upload" and reconfiure the inputs that it suites your mod! Please also change YOURUSERNAME YOURMOD accordingly for GitHub and CF!
+### **Important change these**
+- If you want to build for a different branch, change the branch name main to the right branch.
+- Change the java version from 8 to 16 or whatever version you specifically want. Temurin is the new openjdk.
+- `WEBHOOK_ID` you must fill this one in with the webhook ID of the webhook you make [in Discord](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks). YOU MUST DO THIS IN THE SECRETS TAB WITHIN YOUR GITHUB REPO!
+- `WEBHOOK_TOKEN` you must fill this one in with the webhook TOKEN of the webhook you make [in Discord](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks). YOU MUST DO THIS IN THE SECRETS TAB WITHIN YOUR GITHUB REPO! Example:
+https://canary.discord.com/api/webhooks/912826734573944833/DLTVEgGisp88S6JsNSgJ_lPB8tmgMj0xLzA--MeOxPLfwCNNdCtD8WQ03f14vx0menFN
 
-Variables you need to set in the repo secrets:
-WEBHOOK_ID
-WEBHOOK_TOKEN
-CF_API_TOKEN
+The: `912826734573944833` is the `WEBHOOK_ID`
 
-Example of workflow output on discord: https://github.com/thedarkcolour/Future-MC/pull/276
+The: `DLTVEgGisp88S6JsNSgJ_lPB8tmgMj0xLzA--MeOxPLfwCNNdCtD8WQ03f14vx0menFN` is the `WEBHOOK_TOKEN`
 
-<details>
-  <summary>Click to expand!</summary>
-  
+- Change `USERNAME` and `YOURMOD` with the right names for your GitHub repository. Example
+`YOURUSERNAME/YOURMOD` is for this GitHub repository: `itsmeow/curseforge-upload`
+- The display_name has an example `My Cool Minecraft Mod! ${{ env.VERSION }}`. Change My Cool Minecraft Mod! To something less cringe. The `${{ env.VERSION }}` is optional, and will include the version specified in the commit.
+- The relations `bwm-suite:optionalDependency,crafttweaker:optionalDependency` (etc) is important to fill in correctly. As this will show compability between your mod and the others! You can give each relation the following depedencies: `"embeddedLibrary", "incompatible", "optionalDependency", "requiredDependency", "tool"`. So for example: `bwm-suite:optionalDependency`.
+- The project_id `1234567` needs to be changed to your CurseForge project id. The ID of your project will be in the URL when you go to its overview page.
+- The `CF_API_TOKEN` is another but final token you need. Instructions how to get it are at the bottom of this file.
+
+The secrets you must have:
+
+![](https://imgur.com/7Q4oubQ.png)
+
+How messages will look in Discord:
+
+![](https://user-images.githubusercontent.com/26381427/143136796-6572cc53-8544-4a2a-966f-c1251826f7ab.png)
+
+ 
 ```yaml
 name: Autobuild for Minecraft Mod 1.12.2 Example
 
@@ -108,7 +127,7 @@ jobs: # Define build and release
         with:
           changelog: "${{ env.CHANGELOG }}"
           changelog_type: markdown
-          display_name: "Future MC 1.12.2 ${{ env.VERSION }}"
+          display_name: "My Cool Minecraft Mod! ${{ env.VERSION }}"
           file_path: "${{ env.CFILELOC }}" # ${{steps.download.outputs.download-path}}/*.jar See https://github.com/itsmeow/curseforge-upload/issues/7
           game_endpoint: minecraft
           game_versions: minecraft-1-12:1.12.2,2:Java 8,Forge
@@ -133,9 +152,6 @@ jobs: # Define build and release
           message: Error! It seems that something went wrong with uploading the above jar to Curseforge! Ping the admin to manually update to CF!
 ```
 </details>
-
-
-TODO: add this aswell: https://github.com/Macleykun/Future-MC/blob/patch-1/.github/workflows/pull_requests.yml
 
 ### Game Version IDs:
 You can use numerical (effecient) IDs by making a request to and picking your versions
