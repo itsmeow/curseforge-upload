@@ -1,9 +1,15 @@
-name: "Build Release"
-on: push
+name: "Test Action"
+on:
+  push:
+    branches:
+      - test
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: "Upload to CurseForge"
         uses: itsmeow/curseforge-upload@v3
         with:
