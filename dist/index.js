@@ -11322,10 +11322,10 @@ async function run() {
     relationsString.split(",").forEach((v) => {
       if (v != null && v != "") {
         const projectSplit = v.split(":");
-        projects[index] = {
+        projects.push({
           slug: projectSplit[0],
           type: projectSplit[1],
-        };
+        });
       }
     });
     let metadata = {
