@@ -15,6 +15,6 @@ jobs:
         with:
           file_path: "examplemod-1.0.0.jar"
           game_endpoint: "minecraft"
-          game_versions: "1.12.2,Java 8"
+          game_versions: "1.12,Java 8,1.18.1,1.18"
           project_id: "284609"
           token: "${{ secrets.CF_API_TOKEN }}"
