@@ -139,7 +139,9 @@ async function run() {
         };
       }
     });
-    let metadata = {};
+    let metadata = {
+      changelog: changelog || "",
+    };
     if (gameVersions.length > 0) {
       metadata.gameVersions = gameVersions;
     }
@@ -154,9 +156,6 @@ async function run() {
       );
     } else {
       metadata.releaseType = releaseType == "" ? "release" : releaseType;
-    }
-    if (changelog != "") {
-      metadata.changelog = changelog;
     }
     if (changelogType != "") {
       metadata.changelogType = changelogType;
