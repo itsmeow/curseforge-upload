@@ -109,7 +109,7 @@ async function run() {
   try {
     const token = core.getInput("token", { required: true });
     const projectId = core.getInput("project_id", { required: true });
-    if (!isID(parentFileIDStr)) {
+    if (!isID(projectId)) {
       core.setFailed("Invalid project ID! (Must be an integer)");
     }
     const endpoint = core.getInput("game_endpoint", { required: true });
