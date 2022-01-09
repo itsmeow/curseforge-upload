@@ -5,7 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "Upload to CurseForge"
-        uses: itsmeow/curseforge-upload@v2
+        uses: itsmeow/curseforge-upload@v3
         with:
           file_path: "examplemod-1.0.0.jar"
           game_endpoint: "minecraft"
