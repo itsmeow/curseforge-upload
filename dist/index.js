@@ -11346,8 +11346,17 @@ async function run() {
     } else {
       metadata.releaseType = releaseType == "" ? "release" : releaseType;
     }
-    if (changelogType != "") {
-      metadata.changelogType = changelogType;
+    if (
+      changelogType != "" &&
+      changelogType != "markdown" &&
+      changelogType != "html" &&
+      changelogType != "text"
+    ) {
+      core.setFailed(
+        `Invalid changelog type: ${changelogType} (valid values: "markdown", "html", "text")`
+      );
+    } else {
+      metadata.changelogType = changelogType || "markdown";
     }
     if (displayName != "") {
       metadata.displayName = displayName;
