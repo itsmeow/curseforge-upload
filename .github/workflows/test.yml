@@ -1,0 +1,14 @@
+name: "Build Release"
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Upload to CurseForge"
+        uses: itsmeow/curseforge-upload@v2
+        with:
+          file_path: "examplemod-1.0.0.jar"
+          game_endpoint: "minecraft"
+          game_versions: "Minecraft 1.12:1.12.2,Java 8"
+          project_id: "284609"
+          token: "${{ secrets.CF_API_TOKEN }}"
