@@ -61,7 +61,7 @@ exec {
 
 ## Getting an API token
 
-Obtain them here: https://authors.curseforge.com/account/api-tokens
+Obtain them here: https://www.curseforge.com/account/api-tokens
 
 Add the token to your repository's secrets tab to use it, found under Settings.
 
