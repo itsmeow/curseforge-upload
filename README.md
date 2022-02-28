@@ -69,11 +69,19 @@ Add the token to your repository's secrets tab to use it, found under Settings.
 
 You **MUST** namespace Minecraft version IDs as there are duplicates in the system for Bukkit.
 
+### API Method
+
 You can use numerical IDs by making a request to and picking your versions from this API:
 
 https://`endpoint`.curseforge.com/api/game/versions?token=`your_token`
 
 Using this method is more efficient request wise, as otherwise the Action will have to search this API before requesting the upload.
+
+### Inspect Element Method
+
+Another method is using Inspect Element on the game version check boxes, the `value` field contains the version ID.
+
+### Convenience Method
 
 However, this is not always convenient. You can also use names and slugs from that API, for example: "1.12.2" and "Java 8" will be automatically parsed into the proper id.
 
