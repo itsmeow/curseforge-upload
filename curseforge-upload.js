@@ -210,7 +210,7 @@ async function run() {
         }
       } else {
         core.setFailed(
-          `Request error:${err}\nResponse body:\n${response.body}\nRequest body:${body}`
+          `Request error:${err}\nResponse body:\n${response?.body}\nRequest body:${body}`
         );
       }
     });
